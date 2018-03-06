@@ -17,7 +17,6 @@ var io = require('socket.io')(server);
 io.on('connection', (client)=>{
     console.log(`Client ${client.id} connected!`);
     client.on('drawn', (data)=>{
-        console.log(`Drawn ${data.x}, ${data.y}`);
         client.broadcast.emit('update', data);
     })
 })
