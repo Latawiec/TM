@@ -4,6 +4,8 @@ var brushSizeIndicator;
 var penSelected = true;
 var eraserSelected = false;
 
+var socket = io();
+
 function updateBrushSize(value){
   brushSize += value;
   brushSizeIndicator.style.width = brushSize;
@@ -47,6 +49,11 @@ function setup() {
       updateBrushSize(-1);
     }
   });
+
+  socket.on('update', (data)=>{
+    fill(122, 122, 0);
+    ellipse(data.x, data.y, brushSize, brushSize);
+  })
 }
 
 
@@ -60,5 +67,7 @@ function mouseDragged() {
   } else if(penSelected){
     fill(0, 0, 0);
   }
-    ellipse(mouseX, mouseY, brushSize, brushSize);
+  ellipse(mouseX, mouseY, brushSize, brushSize);
+
+  socket.emit('drawn', { x: mouseX, y: mouseY });
 }
