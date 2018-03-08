@@ -25,6 +25,7 @@
     align-content: center;
     text-align: center;
     padding: 2px;
+    width: 60px;
 }
 
 .drawingPanel{
@@ -33,5 +34,18 @@
     border-width: 2px;
     margin: 0px;
     padding: 0px;
-    height: 500px;
+    height: 700px;
+}
+
+.colorPicker{
+    margin: 20px;
+}
+
+#colorPickDom{
+    height: 10px;
+    width: 100%;
+}
+
+#colorPickDOM > canvas{
+
 }
