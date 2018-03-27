@@ -1,14 +1,24 @@
-var trace1 = {
-    x: [1, 2, 3, 4], 
-    y: [10, 15, 13, 17], 
-    type: 'scatter'
-};
-var trace2 = {
-    x: [1, 2, 3, 4], 
-    y: [16, 5, 11, 9], 
-    type: 'scatter'
-};
-var data = [trace1, trace2];
-Plotly.newPlot('PLOT', data);
+var fileChoose = document.getElementById('myFile');
+var graphDiv = document.getElementById('PLOT');
 
+fileChoose.addEventListener("change", function () {
+    var files = fileChoose.files;
+    var reader = new FileReader();
+    var counter = 0;
+    reader.onloadend = function(){
+      counter++;
+      DrawPlot(JSON.parse(reader.result));
+      if(counter < files.length)
+      {
+        reader.readAsText(files[counter]);
+      }
+    };
+    reader.readAsText(files[0]);
+  });
+
+Plotly.newPlot(graphDiv, []);
+
+function DrawPlot(data){
+    Plotly.addTraces(graphDiv, data);
+}
 
